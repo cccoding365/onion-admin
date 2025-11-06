@@ -1,0 +1,41 @@
+:root {
+  /* 默认主色，可被 Pinia store 覆盖 */
+  --el-color-primary: #409eff;
+}
+
+/* 布局常用样式 */
+.app-layout {
+  height: 100vh;
+  background-color: var(--el-bg-color-page);
+}
+
+.sidebar {
+  transition: width 0.2s ease;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-right {
+  margin-left: auto;
+}
+
+/* 亮暗色下，头部与主体背景跟随 Element Plus 的主题变量 */
+.el-header {
+  background-color: var(--el-bg-color);
+  /* border-bottom: 1px solid var(--el-border-color); */
+}
+
+.el-main {
+  background-color: var(--el-bg-color-page);
+}
+
+/* 侧边栏使用覆盖背景并加分隔线 */
+.el-aside {
+  overflow: hidden;
+  background-color: var(--el-bg-color);
+  /* border-right: 1px solid var(--el-border-color); */
+}
