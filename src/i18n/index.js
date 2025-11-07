@@ -8,6 +8,7 @@ const messages = {
     menu: {
       dashboard: '仪表盘',
       about: '关于',
+      admin: '管理',
     },
     actions: {
       dark: '暗色',
@@ -23,6 +24,19 @@ const messages = {
     breadcrumb: {
       home: '首页',
     },
+    auth: {
+      login: '登录',
+      register: '注册',
+      switchToRegister: '没有账号？注册',
+      switchToLogin: '已有账号？登录',
+      username: '账号',
+      password: '密码',
+      role: '角色',
+      admin: '管理员',
+      user: '普通用户',
+      forbidden: '访问被拒绝（403）',
+      logout: '退出登录',
+    },
     footer: {
       copyright: '© 2023 Onion Admin. All Rights Reserved.',
     },
@@ -34,6 +48,7 @@ const messages = {
     menu: {
       dashboard: 'Dashboard',
       about: 'About',
+      admin: 'Admin',
     },
     actions: {
       dark: 'Dark',
@@ -48,6 +63,19 @@ const messages = {
     },
     breadcrumb: {
       home: 'Home',
+    },
+    auth: {
+      login: 'Login',
+      register: 'Register',
+      switchToRegister: "New here? Register",
+      switchToLogin: 'Have an account? Login',
+      username: 'Username',
+      password: 'Password',
+      role: 'Role',
+      admin: 'Admin',
+      user: 'User',
+      forbidden: 'Access Denied (403)',
+      logout: 'Logout',
     },
     footer: {
       copyright: '© 2023 Onion Admin. All Rights Reserved.',

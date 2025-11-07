@@ -1,15 +1,24 @@
 <script setup>
 import { useAppStore } from '../stores/app'
+import { useUserStore } from '../stores/user'
+import { useRouter } from 'vue-router'
 import { Fold, Expand, FullScreen } from '@element-plus/icons-vue'
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const app = useAppStore()
+const user = useUserStore()
+const router = useRouter()
 const color = ref(app.primaryColor)
 // 使用全局 i18n 作用域，保证切换语言立即影响所有组件
 const { t, locale } = useI18n({ useScope: 'global' })
 
 watch(color, (val) => app.setPrimaryColor(val))
+
+function logout() {
+  user.logout()
+  router.push('/auth')
+}
 </script>
 
 <template>
@@ -39,6 +48,26 @@ watch(color, (val) => app.setPrimaryColor(val))
       <el-button text @click="app.toggleFullscreen">
         <el-icon><FullScreen /></el-icon>
       </el-button>
+
+      <template v-if="user.token">
+        <el-divider direction="vertical" />
+        <el-dropdown>
+          <span class="el-dropdown-link" style="display:flex;align-items:center;gap:8px;">
+            <el-avatar :size="28">{{ (user.currentUser?.username || 'U').slice(0,1).toUpperCase() }}</el-avatar>
+            <span>{{ user.currentUser?.username }}</span>
+            <el-tag size="small" type="info">{{ user.currentUser?.role }}</el-tag>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item @click="logout">{{ t('auth.logout') }}</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </template>
+      <template v-else>
+        <el-divider direction="vertical" />
+        <el-button type="primary" text @click="router.push('/auth')">{{ t('auth.login') }}</el-button>
+      </template>
     </div>
   </div>
 </template>

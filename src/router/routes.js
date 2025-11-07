@@ -18,7 +18,17 @@ export const layoutRoutes = [
     meta: {
       titleKey: 'menu.about',
       icon: 'InfoFilled',
-      roles: ['admin', 'user'],
+      roles: ['admin'],
+    },
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('../views/Admin.vue'),
+    meta: {
+      titleKey: 'menu.admin',
+      icon: 'Setting',
+      roles: ['admin'],
     },
   },
 ]
