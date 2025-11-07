@@ -8,7 +8,17 @@ const messages = {
     menu: {
       dashboard: '仪表盘',
       about: '关于',
-      admin: '管理',
+      users: '用户管理',
+      roles: '角色管理',
+      permissions: '权限管理',
+      departments: '部门组织',
+      menus: '菜单管理',
+      logs: '操作日志',
+      settings: '系统设置',
+      tasks: '任务调度',
+      notifications: '消息通知',
+      files: '文件存储',
+      dicts: '字典管理',
     },
     dashboard: {
       users: '用户数',
@@ -76,7 +86,7 @@ const messages = {
       reset: '重置',
       invalidAgeRange: '年龄需在 0–120 范围内',
     },
-    adminPage: {
+    usersPage: {
       username: '账号',
       nickname: '昵称',
       role: '角色',
@@ -107,7 +117,17 @@ const messages = {
     menu: {
       dashboard: 'Dashboard',
       about: 'About',
-      admin: 'Admin',
+      users: 'Users',
+      roles: 'Roles',
+      permissions: 'Permissions',
+      departments: 'Departments',
+      menus: 'Menus',
+      logs: 'Logs',
+      settings: 'Settings',
+      tasks: 'Tasks',
+      notifications: 'Notifications',
+      files: 'Files',
+      dicts: 'Dictionaries',
     },
     dashboard: {
       users: 'Users',
@@ -175,7 +195,7 @@ const messages = {
       reset: 'Reset',
       invalidAgeRange: 'Age must be within 0–120',
     },
-    adminPage: {
+    usersPage: {
       username: 'Username',
       nickname: 'Nickname',
       role: 'Role',

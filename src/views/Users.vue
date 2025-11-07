@@ -57,7 +57,7 @@ function saveEdit() {
       age: editForm.age,
       gender: editForm.gender,
     });
-    ElMessage.success(t("adminPage.saved"));
+    ElMessage.success(t("usersPage.saved"));
     editing.value = null;
   } catch (e) {
     ElMessage.error(e?.message || String(e));
@@ -66,15 +66,15 @@ function saveEdit() {
 
 function remove(row) {
   ElMessageBox.confirm(
-    t("adminPage.deleteConfirm", { username: row.username }),
-    t("adminPage.deleteTitle"),
+    t("usersPage.deleteConfirm", { username: row.username }),
+    t("usersPage.deleteTitle"),
     {
       type: "warning",
     }
   )
     .then(() => {
       user.adminDeleteUser(row.username);
-      ElMessage.success(t("adminPage.deleted"));
+      ElMessage.success(t("usersPage.deleted"));
     })
     .catch(() => {});
 }
@@ -101,7 +101,7 @@ function openCreate() {
 function submitCreate() {
   try {
     if (!createForm.username || !createForm.password) {
-      throw new Error(t("adminPage.required"));
+      throw new Error(t("usersPage.required"));
     }
     if (createForm.age < 0 || createForm.age > 120) {
       throw new Error(t("common.invalidAgeRange"));
@@ -115,7 +115,7 @@ function submitCreate() {
       gender: createForm.gender,
     });
     showCreate.value = false;
-    ElMessage.success(t("adminPage.created"));
+    ElMessage.success(t("usersPage.created"));
   } catch (e) {
     ElMessage.error(e?.message || String(e));
   }
@@ -123,7 +123,7 @@ function submitCreate() {
 </script>
 
 <template>
-  <div class="admin-page">
+  <div class="users-page">
     <el-card>
       <template #header>
         <div
@@ -134,9 +134,9 @@ function submitCreate() {
             gap: 12px;
           "
         >
-          <span>{{ t("menu.admin") }}</span>
+          <span>{{ t("menu.users") }}</span>
           <el-button type="primary" @click="openCreate">{{
-            t("adminPage.createUser")
+            t("usersPage.createUser")
           }}</el-button>
         </div>
       </template>
@@ -175,7 +175,7 @@ function submitCreate() {
           :max="120"
           :step="1"
           controls-position="right"
-          :placeholder="t('adminPage.ageMin')"
+          :placeholder="t('usersPage.ageMin')"
         />
         <span>-</span>
         <el-input-number
@@ -184,7 +184,7 @@ function submitCreate() {
           :max="120"
           :step="1"
           controls-position="right"
-          :placeholder="t('adminPage.ageMax')"
+          :placeholder="t('usersPage.ageMax')"
         />
         <el-button
           @click="
@@ -199,11 +199,11 @@ function submitCreate() {
       <el-table :data="filteredUsers" border style="width: 100%">
         <el-table-column type="index" :index="(n) => n + 1" />
         <el-table-column
-          :label="t('adminPage.username')"
+          :label="t('usersPage.username')"
           prop="username"
           width="150"
         />
-        <el-table-column :label="t('adminPage.nickname')" width="220">
+        <el-table-column :label="t('usersPage.nickname')" width="220">
           <template #default="{ row }">
             <div v-if="editing === row.username">
               <el-input v-model="editForm.nickname" size="small" />
@@ -211,7 +211,7 @@ function submitCreate() {
             <div v-else>{{ row.nickname }}</div>
           </template>
         </el-table-column>
-        <el-table-column :label="t('adminPage.role')" width="150">
+        <el-table-column :label="t('usersPage.role')" width="150">
           <template #default="{ row }">
             <div
               v-if="editing === row.username"
@@ -235,7 +235,7 @@ function submitCreate() {
           </template>
         </el-table-column>
         <el-table-column
-          :label="t('adminPage.age')"
+          :label="t('usersPage.age')"
           width="150"
           :sortable="true"
           :sort-method="(a, b) => (a.age || 0) - (b.age || 0)"
@@ -253,7 +253,7 @@ function submitCreate() {
           </template>
         </el-table-column>
         <el-table-column
-          :label="t('adminPage.gender')"
+          :label="t('usersPage.gender')"
           width="150"
           :sortable="true"
           :sort-method="(a, b) => genderOrder[a.gender] - genderOrder[b.gender]"
@@ -299,13 +299,13 @@ function submitCreate() {
             </div>
           </template>
         </el-table-column>
-        <el-table-column :label="t('adminPage.createdAt')" width="200">
+        <el-table-column :label="t('usersPage.createdAt')" width="200">
           <template #default="{ row }">
             {{ dayjs(row.createdAt).format("YYYY-MM-DD HH:mm") }}
           </template>
         </el-table-column>
         <el-table-column
-          :label="t('adminPage.actions')"
+          :label="t('usersPage.actions')"
           fixed="right"
           min-width="150"
         >
@@ -315,22 +315,22 @@ function submitCreate() {
               style="display: flex; gap: 8px"
             >
               <el-button type="primary" size="small" @click="saveEdit">{{
-                t("adminPage.save")
+                t("usersPage.save")
               }}</el-button>
               <el-button size="small" @click="cancelEdit">{{
-                t("adminPage.cancel")
+                t("usersPage.cancel")
               }}</el-button>
             </div>
             <div v-else style="display: flex; gap: 8px">
               <el-button type="primary" size="small" @click="startEdit(row)">{{
-                t("adminPage.edit")
+                t("usersPage.edit")
               }}</el-button>
               <el-button
                 v-if="row.role !== 'admin'"
                 type="danger"
                 size="small"
                 @click="remove(row)"
-              >{{ t("adminPage.delete") }}</el-button>
+              >{{ t("usersPage.delete") }}</el-button>
             </div>
           </template>
         </el-table-column>
@@ -339,11 +339,11 @@ function submitCreate() {
 
     <el-dialog
       v-model="showCreate"
-      :title="t('adminPage.createUser')"
+      :title="t('usersPage.createUser')"
       width="480px"
     >
       <el-form label-position="top">
-        <el-form-item :label="t('adminPage.username')">
+        <el-form-item :label="t('usersPage.username')">
           <el-input v-model="createForm.username" autocomplete="off" />
         </el-form-item>
         <el-form-item :label="t('auth.password')">
@@ -353,10 +353,10 @@ function submitCreate() {
             autocomplete="new-password"
           />
         </el-form-item>
-        <el-form-item :label="t('adminPage.nickname')">
+        <el-form-item :label="t('usersPage.nickname')">
           <el-input v-model="createForm.nickname" autocomplete="off" />
         </el-form-item>
-        <el-form-item :label="t('adminPage.age')">
+        <el-form-item :label="t('usersPage.age')">
           <el-input-number
             v-model="createForm.age"
             :min="0"
@@ -364,7 +364,7 @@ function submitCreate() {
             style="width: 100%"
           />
         </el-form-item>
-        <el-form-item :label="t('adminPage.gender')">
+        <el-form-item :label="t('usersPage.gender')">
           <el-select v-model="createForm.gender" style="width: 100%">
             <el-option value="male">
               <div style="display: flex; align-items: center; gap: 6px">
@@ -383,7 +383,7 @@ function submitCreate() {
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="t('adminPage.role')">
+        <el-form-item :label="t('usersPage.role')">
           <el-select v-model="createForm.role" style="width: 100%">
             <el-option :label="t('auth.admin')" value="admin" />
             <el-option :label="t('auth.user')" value="user" />
@@ -392,10 +392,10 @@ function submitCreate() {
       </el-form>
       <template #footer>
         <el-button @click="showCreate = false">{{
-          t("adminPage.cancel")
+          t("usersPage.cancel")
         }}</el-button>
         <el-button type="primary" @click="submitCreate">{{
-          t("adminPage.create")
+          t("usersPage.create")
         }}</el-button>
       </template>
     </el-dialog>
@@ -403,7 +403,7 @@ function submitCreate() {
 </template>
 
 <style scoped>
-.admin-page {
+.users-page {
   display: flex;
   flex-direction: column;
   gap: 16px;
