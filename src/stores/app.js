@@ -3,10 +3,10 @@ import { defineStore } from 'pinia'
 export const useAppStore = defineStore('app', {
   state: () => ({
     collapsed: false,
-    isDark: JSON.parse(localStorage.getItem('onion-dark') || 'false'),
-    primaryColor: localStorage.getItem('onion-primary') || '#409EFF',
+    isDark: false,
+    primaryColor: '#409EFF',
     isFullscreen: false,
-    locale: localStorage.getItem('onion-locale') || 'zh-CN',
+    locale: 'zh-CN',
   }),
   actions: {
     toggleCollapse() {
@@ -14,17 +14,14 @@ export const useAppStore = defineStore('app', {
     },
     toggleDark(val) {
       this.isDark = typeof val === 'boolean' ? val : !this.isDark
-      localStorage.setItem('onion-dark', JSON.stringify(this.isDark))
       this.applyTheme()
     },
     setPrimaryColor(color) {
       this.primaryColor = color
-      localStorage.setItem('onion-primary', this.primaryColor)
       this.applyTheme()
     },
     setLocale(locale) {
       this.locale = locale
-      localStorage.setItem('onion-locale', this.locale)
     },
     applyTheme() {
       const root = document.documentElement
@@ -46,5 +43,9 @@ export const useAppStore = defineStore('app', {
         console.error('Fullscreen toggle error:', e)
       }
     },
+  },
+  persist: {
+    key: 'onion-app',
+    paths: ['collapsed', 'isDark', 'primaryColor', 'isFullscreen', 'locale'],
   },
 })

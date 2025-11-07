@@ -14,4 +14,8 @@ export const useUserStore = defineStore('user', {
       return this.roles.some((r) => req.includes(r))
     },
   },
+  persist: {
+    key: 'onion-user',
+    paths: ['roles'],
+  },
 })

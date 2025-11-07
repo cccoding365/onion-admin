@@ -35,4 +35,8 @@ export const useTabsStore = defineStore('tabs', {
       this.active = ''
     },
   },
+  persist: {
+    key: 'onion-tabs',
+    paths: ['visited', 'active'],
+  },
 })

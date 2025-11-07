@@ -58,7 +58,8 @@ const messages = {
 export const i18n = createI18n({
   legacy: false,
   globalInjection: true,
-  locale: localStorage.getItem('onion-locale') || 'zh-CN',
+  // 默认语言使用中文，实际语言将由入口处与 Pinia 状态同步
+  locale: 'zh-CN',
   fallbackLocale: 'en',
   messages,
 })
