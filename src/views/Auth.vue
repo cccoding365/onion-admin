@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/user'
 import { useI18n } from 'vue-i18n'
+import { ElMessage } from 'element-plus'
 
 const { t } = useI18n({ useScope: 'global' })
 const router = useRouter()
@@ -12,15 +13,15 @@ const mode = ref('login') // 'login' | 'register'
 const username = ref('')
 const password = ref('')
 const role = ref('user')
-const error = ref('')
+// const error = ref('')
 
 function toggleMode() {
   mode.value = mode.value === 'login' ? 'register' : 'login'
-  error.value = ''
+  // error.value = ''
 }
 
 async function submit() {
-  error.value = ''
+  // error.value = ''
   try {
     if (mode.value === 'login') {
       await user.login({ username: username.value, password: password.value })
@@ -29,7 +30,8 @@ async function submit() {
     }
     router.push('/dashboard')
   } catch (e) {
-    error.value = e?.message || String(e)
+    ElMessage.error(e?.message || String(e))
+    // error.value = e?.message || String(e)
   }
 }
 </script>
@@ -60,7 +62,7 @@ async function submit() {
           </el-select>
         </el-form-item>
 
-        <el-alert v-if="error" :title="error" type="error" show-icon style="margin-bottom:12px;" />
+        <!-- <el-alert v-if="error" :title="error" type="error" show-icon style="margin-bottom:12px;" /> -->
 
         <el-button type="primary" style="width:100%" @click="submit">
           {{ mode==='login' ? t('auth.login') : t('auth.register') }}

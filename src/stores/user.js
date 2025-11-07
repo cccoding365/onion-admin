@@ -50,6 +50,37 @@ export const useUserStore = defineStore('user', {
       if (this.users[idx].password !== currentPassword) throw new Error('Current password incorrect')
       this.users[idx].password = newPassword
     },
+    // Admin-only CRUD actions (mock)
+    adminCreateUser({ username, password, role = 'user', nickname, avatar = '' }) {
+      const exists = this.users.find((u) => u.username === username)
+      if (exists) throw new Error('Username already exists')
+      const newUser = { username, password, role, nickname: nickname || username, avatar }
+      this.users.push(newUser)
+      return newUser
+    },
+    adminDeleteUser(username) {
+      const idx = this.users.findIndex((u) => u.username === username)
+      if (idx === -1) throw new Error('User not found')
+      const isCurrent = this.currentUser?.username === username
+      this.users.splice(idx, 1)
+      if (isCurrent) {
+        this.logout()
+      }
+    },
+    adminUpdateUser({ username, nickname, role, password, avatar }) {
+      const idx = this.users.findIndex((u) => u.username === username)
+      if (idx === -1) throw new Error('User not found')
+      if (typeof nickname === 'string') this.users[idx].nickname = nickname
+      if (typeof role === 'string') this.users[idx].role = role
+      if (typeof password === 'string') this.users[idx].password = password
+      if (typeof avatar === 'string') this.users[idx].avatar = avatar
+      if (this.currentUser?.username === username) {
+        this.currentUser.nickname = this.users[idx].nickname
+        this.currentUser.avatar = this.users[idx].avatar
+        this.roles = [this.users[idx].role]
+      }
+      return this.users[idx]
+    },
     hasAccess(route) {
       const req = route.meta?.roles
       if (!req || req.length === 0) return true
