@@ -44,4 +44,11 @@ const localeMap = { 'zh-CN': zhCn, en }
 
 <style scoped>
 /* 可在此处追加局部样式 */
+.el-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #909399;
+  font-size: 14px;
+}
 </style>

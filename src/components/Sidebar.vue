@@ -29,7 +29,7 @@ const visibleRoutes = layoutRoutes.filter((r) => {
         <el-icon>
           <component :is="Icons[r.meta?.icon]" />
         </el-icon>
-        <span>{{ t(r.meta?.titleKey) }}</span>
+        <span v-if="!app.collapsed">{{ t(r.meta?.titleKey) }}</span>
       </el-menu-item>
     </template>
   </el-menu>

@@ -40,4 +40,15 @@ if (i18n.global?.locale) {
   }
 }
 
+// 订阅 Pinia 中的语言变化，立即同步到 i18n
+appStore.$subscribe((mutation, state) => {
+  if (i18n.global?.locale) {
+    if ('value' in i18n.global.locale) {
+      i18n.global.locale.value = state.locale
+    } else {
+      i18n.global.locale = state.locale
+    }
+  }
+})
+
 app.mount('#app')
