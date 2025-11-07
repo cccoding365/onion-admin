@@ -23,11 +23,7 @@ function logout() {
 
 <template>
   <div class="header-actions">
-    <el-button text @click="app.toggleCollapse()">
-      <el-icon>
-        <component :is="app.collapsed ? Expand : Fold" />
-      </el-icon>
-    </el-button>
+    
 
     <el-switch
       v-model="app.isDark"
@@ -53,12 +49,15 @@ function logout() {
         <el-divider direction="vertical" />
         <el-dropdown>
           <span class="el-dropdown-link" style="display:flex;align-items:center;gap:8px;">
-            <el-avatar :size="28">{{ (user.currentUser?.username || 'U').slice(0,1).toUpperCase() }}</el-avatar>
-            <span>{{ user.currentUser?.username }}</span>
+            <el-avatar :size="28" :src="user.currentUser?.avatar || undefined">
+              {{ (user.currentUser?.nickname || user.currentUser?.username || 'U').slice(0,1).toUpperCase() }}
+            </el-avatar>
+            <span>{{ user.currentUser?.nickname || user.currentUser?.username }}</span>
             <el-tag size="small" type="info">{{ user.currentUser?.role }}</el-tag>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
+              <el-dropdown-item @click="router.push('/profile')">{{ t('profile.title') }}</el-dropdown-item>
               <el-dropdown-item @click="logout">{{ t('auth.logout') }}</el-dropdown-item>
             </el-dropdown-menu>
           </template>

@@ -12,8 +12,14 @@ const user = useUserStore()
 const route = useRoute()
 
 const visibleRoutes = layoutRoutes.filter((r) => {
-  // 过滤掉重定向等没有 meta/titleKey 的项
-  return r.component && r.meta && r.meta.titleKey && user.hasAccess(r)
+  // 过滤掉重定向、隐藏项，以及没有标题键的项
+  return (
+    r.component &&
+    r.meta &&
+    r.meta.titleKey &&
+    !r.meta.hidden &&
+    user.hasAccess(r)
+  )
 })
 </script>
 

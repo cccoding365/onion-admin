@@ -31,4 +31,15 @@ export const layoutRoutes = [
       roles: ['admin'],
     },
   },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue'),
+    meta: {
+      titleKey: 'profile.title',
+      icon: 'User',
+      roles: ['admin', 'user'],
+      hidden: true,
+    },
+  },
 ]
