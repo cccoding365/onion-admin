@@ -10,6 +10,15 @@ const messages = {
       about: '关于',
       admin: '管理',
     },
+    dashboard: {
+      users: '用户数',
+      orders: '订单数',
+      revenue: '收入',
+      conversion: '转化率',
+      barTitle: '每周访问量（柱状图）',
+      pieTitle: '渠道占比（饼图）',
+      lineTitle: '月度趋势（折线图）',
+    },
     actions: {
       dark: '暗色',
       light: '亮色',
@@ -65,6 +74,15 @@ const messages = {
       dashboard: 'Dashboard',
       about: 'About',
       admin: 'Admin',
+    },
+    dashboard: {
+      users: 'Users',
+      orders: 'Orders',
+      revenue: 'Revenue',
+      conversion: 'Conversion Rate',
+      barTitle: 'Weekly Visits (Bar)',
+      pieTitle: 'Channel Share (Pie)',
+      lineTitle: 'Monthly Trend (Line)',
     },
     actions: {
       dark: 'Dark',
