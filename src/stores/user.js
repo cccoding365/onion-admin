@@ -75,6 +75,10 @@ export const useUserStore = defineStore('user', {
     adminDeleteUser(username) {
       const idx = this.users.findIndex((u) => u.username === username)
       if (idx === -1) throw new Error('User not found')
+      // Protect admin accounts from deletion
+      if (this.users[idx].role === 'admin') {
+        throw new Error('管理员不可删除')
+      }
       const isCurrent = this.currentUser?.username === username
       this.users.splice(idx, 1)
       if (isCurrent) {

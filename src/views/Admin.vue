@@ -325,9 +325,12 @@ function submitCreate() {
               <el-button type="primary" size="small" @click="startEdit(row)">{{
                 t("adminPage.edit")
               }}</el-button>
-              <el-button type="danger" size="small" @click="remove(row)">{{
-                t("adminPage.delete")
-              }}</el-button>
+              <el-button
+                v-if="row.role !== 'admin'"
+                type="danger"
+                size="small"
+                @click="remove(row)"
+              >{{ t("adminPage.delete") }}</el-button>
             </div>
           </template>
         </el-table-column>
