@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { Fold, Expand, FullScreen } from "@element-plus/icons-vue";
+import { Fold, Expand } from "@element-plus/icons-vue";
 import { useAppStore } from "../stores/app";
 
 const route = useRoute();
