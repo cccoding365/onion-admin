@@ -3,11 +3,13 @@ import { ref, reactive, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { useUserStore } from "../stores/user";
+import { useRolesStore } from "../stores/roles";
 import dayjs from "dayjs";
 import { Male, Female, UserFilled } from "@element-plus/icons-vue";
 
 const { t } = useI18n({ useScope: "global" });
 const user = useUserStore();
+const rolesStore = useRolesStore();
 
 const editing = ref(null); // username of the row being edited
 const editForm = reactive({
@@ -17,6 +19,13 @@ const editForm = reactive({
   age: 18,
   gender: "other",
 });
+
+// 角色选项（仅显示启用的角色），优先显示名称，退回编码
+const enabledRoleOptions = computed(() =>
+  (rolesStore.roles || [])
+    .filter((r) => r.enabled)
+    .map((r) => ({ label: r.name || r.code, value: r.code }))
+);
 
 // Filters for table
 const filters = reactive({ gender: "all", ageMin: 0, ageMax: 120 });
@@ -196,7 +205,7 @@ function submitCreate() {
         >
       </div>
 
-      <el-table :data="filteredUsers" border style="width: 100%">
+  <el-table :data="filteredUsers" border style="width: 100%">
         <el-table-column type="index" :index="(n) => n + 1" />
         <el-table-column
           :label="t('usersPage.username')"
@@ -211,7 +220,7 @@ function submitCreate() {
             <div v-else>{{ row.nickname }}</div>
           </template>
         </el-table-column>
-        <el-table-column :label="t('usersPage.role')" width="150">
+        <el-table-column :label="t('usersPage.role')" width="200">
           <template #default="{ row }">
             <div
               v-if="editing === row.username"
@@ -220,17 +229,28 @@ function submitCreate() {
               <el-select
                 v-model="editForm.role"
                 size="small"
-                style="width: 120px"
+                style="width: 160px"
+                :placeholder="t('usersPage.role')"
               >
-                <el-option :label="t('auth.admin')" value="admin" />
-                <el-option :label="t('auth.user')" value="user" />
+                <el-option
+                  v-for="opt in enabledRoleOptions"
+                  :key="opt.value"
+                  :label="opt.label"
+                  :value="opt.value"
+                />
               </el-select>
             </div>
             <div v-else>
               <el-tag type="success" v-if="row.role === 'admin'">{{
                 t("auth.admin")
               }}</el-tag>
-              <el-tag v-else>{{ t("auth.user") }}</el-tag>
+              <el-tag v-else-if="row.role === 'user'">{{ t("auth.user") }}</el-tag>
+              <el-tag v-else>
+                {{
+                  (rolesStore.roles.find((r) => r.code === row.role)?.name) ||
+                    row.role
+                }}
+              </el-tag>
             </div>
           </template>
         </el-table-column>
@@ -384,9 +404,13 @@ function submitCreate() {
           </el-select>
         </el-form-item>
         <el-form-item :label="t('usersPage.role')">
-          <el-select v-model="createForm.role" style="width: 100%">
-            <el-option :label="t('auth.admin')" value="admin" />
-            <el-option :label="t('auth.user')" value="user" />
+          <el-select v-model="createForm.role" style="width: 100%" :placeholder="t('usersPage.role')">
+            <el-option
+              v-for="opt in enabledRoleOptions"
+              :key="opt.value"
+              :label="opt.label"
+              :value="opt.value"
+            />
           </el-select>
         </el-form-item>
       </el-form>

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useRolesStore } from './roles'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -104,9 +105,42 @@ export const useUserStore = defineStore('user', {
       return this.users[idx]
     },
     hasAccess(route) {
-      const req = route.meta?.roles
-      if (!req || req.length === 0) return true
-      return this.roles.some((r) => req.includes(r))
+      const meta = route.meta || {}
+      const requiredRoles = Array.isArray(meta.roles) ? meta.roles : null
+      const requiredPerms = Array.isArray(meta.permissions) ? meta.permissions : null
+
+      // No restrictions
+      if ((!requiredRoles || requiredRoles.length === 0) && (!requiredPerms || requiredPerms.length === 0)) {
+        return true
+      }
+
+      // Must be logged in to evaluate access
+      if (!this.token) return false
+
+      // Gather current user's permissions from roles store
+      const rolesStore = useRolesStore()
+      const userRoleCodes = Array.isArray(this.roles) ? this.roles : []
+      const userPermsSet = new Set()
+      for (const code of userRoleCodes) {
+        const role = rolesStore.roles.find((r) => r.code === code)
+        if (role && Array.isArray(role.permissions)) {
+          for (const p of role.permissions) userPermsSet.add(p)
+        }
+      }
+
+      // Check permissions first (primary gating)
+      if (requiredPerms && requiredPerms.length > 0) {
+        const hasAnyPerm = requiredPerms.some((p) => userPermsSet.has(p))
+        if (!hasAnyPerm) return false
+      }
+
+      // Fallback: if roles are specified, ensure user has an allowed role
+      if (requiredRoles && requiredRoles.length > 0) {
+        const hasRole = this.roles.some((r) => requiredRoles.includes(r))
+        if (!hasRole) return false
+      }
+
+      return true
     },
   },
   persist: {

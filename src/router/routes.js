@@ -8,7 +8,7 @@ export const layoutRoutes = [
     meta: {
       titleKey: "menu.dashboard",
       icon: "DataLine",
-      roles: ["admin", "user"],
+      permissions: ["dashboard:view"],
     },
   },
   {
@@ -18,7 +18,7 @@ export const layoutRoutes = [
     meta: {
       titleKey: "menu.users",
       icon: "User",
-      roles: ["admin"],
+      permissions: ["users:manage"],
     },
   },
   // Common admin modules (placeholders for future implementation)
@@ -26,13 +26,13 @@ export const layoutRoutes = [
     path: "/roles",
     name: "Roles",
     component: () => import("../views/Roles.vue"),
-    meta: { titleKey: "menu.roles", icon: "PriceTag", roles: ["admin"] },
+    meta: { titleKey: "menu.roles", icon: "PriceTag", permissions: ["roles:manage"] },
   },
   {
     path: "/permissions",
     name: "Permissions",
     component: () => import("../views/Permissions.vue"),
-    meta: { titleKey: "menu.permissions", icon: "Key", roles: ["admin"] },
+    meta: { titleKey: "menu.permissions", icon: "Key", permissions: ["permissions:manage"] },
   },
   {
     path: "/departments",
@@ -41,51 +41,51 @@ export const layoutRoutes = [
     meta: {
       titleKey: "menu.departments",
       icon: "OfficeBuilding",
-      roles: ["admin"],
+      permissions: ["departments:manage"],
     },
   },
   {
     path: "/menus",
     name: "Menus",
     component: () => import("../views/Menus.vue"),
-    meta: { titleKey: "menu.menus", icon: "Memo", roles: ["admin"] },
+    meta: { titleKey: "menu.menus", icon: "Memo", permissions: ["menus:manage"] },
   },
   {
     path: "/logs",
     name: "Logs",
     component: () => import("../views/Logs.vue"),
-    meta: { titleKey: "menu.logs", icon: "Document", roles: ["admin"] },
+    meta: { titleKey: "menu.logs", icon: "Document", permissions: ["logs:view"] },
   },
 
   {
     path: "/tasks",
     name: "Tasks",
     component: () => import("../views/Tasks.vue"),
-    meta: { titleKey: "menu.tasks", icon: "Timer", roles: ["admin"] },
+    meta: { titleKey: "menu.tasks", icon: "Timer", permissions: ["tasks:manage"] },
   },
   {
     path: "/notifications",
     name: "Notifications",
     component: () => import("../views/Notifications.vue"),
-    meta: { titleKey: "menu.notifications", icon: "Bell", roles: ["admin"] },
+    meta: { titleKey: "menu.notifications", icon: "Bell", permissions: ["notifications:manage"] },
   },
   {
     path: "/files",
     name: "Files",
     component: () => import("../views/Files.vue"),
-    meta: { titleKey: "menu.files", icon: "Folder", roles: ["admin"] },
+    meta: { titleKey: "menu.files", icon: "Folder", permissions: ["files:manage"] },
   },
   {
     path: "/dicts",
     name: "Dicts",
     component: () => import("../views/Dicts.vue"),
-    meta: { titleKey: "menu.dicts", icon: "Collection", roles: ["admin"] },
+    meta: { titleKey: "menu.dicts", icon: "Collection", permissions: ["dicts:manage"] },
   },
   {
     path: "/settings",
     name: "Settings",
     component: () => import("../views/Settings.vue"),
-    meta: { titleKey: "menu.settings", icon: "Setting", roles: ["admin"] },
+    meta: { titleKey: "menu.settings", icon: "Setting", permissions: ["settings:manage"] },
   },
   {
     path: "/about",

@@ -18,16 +18,16 @@ const router = createRouter({
   routes,
 })
 
-// 路由权限控制：需要登录且角色符合要求
+// 路由权限控制：需要登录且符合角色或权限要求
 router.beforeEach((to) => {
   const user = useUserStore()
-  const requiresRole = to.matched.some((r) => Array.isArray(r.meta?.roles))
-  if (requiresRole) {
+  const requiresAuth = to.matched.some((r) => Array.isArray(r.meta?.roles) || Array.isArray(r.meta?.permissions))
+  if (requiresAuth) {
     const loggedIn = !!user.token
     if (!loggedIn) {
       return { path: '/auth', query: { redirect: to.fullPath } }
     }
-    const allowed = to.matched.every((r) => !r.meta?.roles || user.hasAccess(r))
+    const allowed = to.matched.every((r) => user.hasAccess(r))
     if (!allowed) {
       return { path: '/403' }
     }
