@@ -11,6 +11,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import 'nprogress/nprogress.css'
 
 // Theme override css vars
 import './styles/theme.css'
