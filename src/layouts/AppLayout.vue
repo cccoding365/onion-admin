@@ -89,6 +89,18 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* 可在此处追加局部样式 */
+.app-layout { height: 100vh; }
+.sidebar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* 隐藏滚动条但保留滚动功能 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.sidebar::-webkit-scrollbar {
+  width: 0 !important; /* Chrome/Safari */
+  height: 0 !important;
+}
 .el-footer {
   display: flex;
   align-items: center;

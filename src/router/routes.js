@@ -69,6 +69,27 @@ export const layoutRoutes = [
     component: () => import("../views/Notifications.vue"),
     meta: { titleKey: "menu.notifications", icon: "Bell", permissions: ["notifications:manage"] },
   },
+  // 示例页面（含常见错误页示例）
+  {
+    path: "/examples",
+    name: "Examples",
+    redirect: "/examples/404",
+    meta: { titleKey: "menu.examples", icon: "Guide" },
+    children: [
+      {
+        path: "/examples/404",
+        name: "Example404",
+        component: () => import("../views/examples/404.vue"),
+        meta: { titleKey: "menu.examples404" },
+      },
+      {
+        path: "/examples/500",
+        name: "Example500",
+        component: () => import("../views/examples/500.vue"),
+        meta: { titleKey: "menu.examples500" },
+      },
+    ],
+  },
   {
     path: "/files",
     name: "Files",

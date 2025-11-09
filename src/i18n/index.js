@@ -19,6 +19,9 @@ const messages = {
       notifications: '消息通知',
       files: '文件存储',
       dicts: '字典管理',
+      examples: '示例页面',
+      examples404: '404 页面',
+      examples500: '500 页面',
     },
     dashboard: {
       users: '用户数',
@@ -222,6 +225,9 @@ const messages = {
       notifications: 'Notifications',
       files: 'Files',
       dicts: 'Dictionaries',
+      examples: 'Examples',
+      examples404: '404 Page',
+      examples500: '500 Page',
     },
     dashboard: {
       users: 'Users',
