@@ -59,7 +59,7 @@ function logout() {
           </el-icon>
         </el-button>
       </el-tooltip>
-      <el-button text @click="app.toggleFullscreen">
+      <el-button text circle aria-label="toggle fullscreen" @click="app.toggleFullscreen">
         <el-icon><FullScreen /></el-icon>
       </el-button>
 

@@ -210,7 +210,7 @@ watch(
 }
 .marquee-track {
   display: inline-block;
-  padding-right: 40px;
+  padding-right: 50%;
   animation: marquee 18s linear infinite;
 }
 .notice-marquee:hover .marquee-track {
