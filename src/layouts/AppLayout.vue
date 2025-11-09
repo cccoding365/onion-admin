@@ -32,11 +32,11 @@ const localeMap = { 'zh-CN': zhCn, en }
         <el-main>
           <RouterView />
         </el-main>
-        <el-footer>
+        <!-- <el-footer>
           <div class="footer-content">
             <span>{{ t('footer.copyright') }}</span>
           </div>
-        </el-footer>
+        </el-footer> -->
       </el-container>
     </el-container>
   </el-config-provider>
