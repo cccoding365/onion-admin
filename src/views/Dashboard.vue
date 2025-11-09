@@ -155,6 +155,13 @@ watch(
           :prefix="item.key==='revenue' ? '$' : ''"
           :suffix="item.key==='conversion' ? '%' : ''"
           :decimals="item.key==='conversion' ? 1 : 0"
+          :icon="
+            item.key==='users' ? 'User' :
+            item.key==='orders' ? 'Goods' :
+            item.key==='revenue' ? 'Money' :
+            'DataAnalysis'
+          "
+          :iconColor="app.primaryColor"
         />
       </el-col>
     </el-row>
