@@ -125,6 +125,20 @@ function rowClassName(row) {
             </el-table-column>
           </el-table>
           <el-empty v-if="itemsByType.length === 0" :description="''" />
+      </el-tab-pane>
+
+        <el-tab-pane :label="t('notificationsPage.typeGlobal')" name="global">
+          <div class="section-title">{{ t('notificationsPage.settingsTitle') }}</div>
+          <div class="tab-toolbar">
+            <div class="toolbar-item">
+              <el-checkbox v-model="noti.globalLoginNotifyEnabled" @change="noti.setGlobalLoginNotifyEnabled">{{ t('notificationsPage.globalLoginNotifyLabel') }}</el-checkbox>
+            </div>
+            <div class="toolbar-item">
+              <el-checkbox v-model="noti.globalReturnNotifyEnabled" @change="noti.setGlobalReturnNotifyEnabled">{{ t('notificationsPage.globalReturnNotifyLabel') }}</el-checkbox>
+            </div>
+            <div class="flex-spacer" />
+          </div>
+          <div class="type-hint">{{ t('notificationsPage.noExtraConfigModal') }}</div>
         </el-tab-pane>
 
         <el-tab-pane :label="t('notificationsPage.typeSidebar')" name="sidebar">

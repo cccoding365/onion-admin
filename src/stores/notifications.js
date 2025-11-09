@@ -22,6 +22,10 @@ export const useNotificationsStore = defineStore('notifications', {
     dashboardStrategy: 'marquee', // 'marquee' | 'static' | 'autoClose'
     dashboardAutoCloseMs: 10000,
 
+    // 全局通知设置：登录成功提示与回到应用提示
+    globalLoginNotifyEnabled: true,
+    globalReturnNotifyEnabled: true,
+
     // 历史与当前（按类型），默认空，由种子逻辑在首次使用时填充
     items: [], // { id, type, content, createdAt }
     currentId: null, // 兼容旧版本：仅仪表盘当前
@@ -100,9 +104,15 @@ export const useNotificationsStore = defineStore('notifications', {
       const n = Number(ms)
       this.dashboardAutoCloseMs = Number.isFinite(n) && n >= 1000 ? n : 10000
     },
+    setGlobalLoginNotifyEnabled(val) {
+      this.globalLoginNotifyEnabled = !!val
+    },
+    setGlobalReturnNotifyEnabled(val) {
+      this.globalReturnNotifyEnabled = !!val
+    },
   },
   persist: {
     key: 'onion-notifications',
-    paths: ['dashboardEnabled', 'dashboardStrategy', 'dashboardAutoCloseMs', 'items', 'currentByType', 'currentId', 'seeded'],
+    paths: ['dashboardEnabled', 'dashboardStrategy', 'dashboardAutoCloseMs', 'globalLoginNotifyEnabled', 'globalReturnNotifyEnabled', 'items', 'currentByType', 'currentId', 'seeded'],
   },
 })

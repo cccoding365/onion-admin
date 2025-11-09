@@ -156,6 +156,9 @@ const messages = {
       typeDashboard: '仪表盘',
       typeSidebar: '侧栏',
       typeModal: '弹窗',
+      typeGlobal: '全局通知',
+      globalLoginNotifyLabel: '登录成功是否提示',
+      globalReturnNotifyLabel: '回到应用是否提示',
       strategyLabel: '仪表盘显示策略',
       strategyMarquee: '轮播滚动',
       strategyStatic: '静态显示',
@@ -188,6 +191,8 @@ const messages = {
     notify: {
       loginSuccessTitle: '登录成功',
       welcomeBack: '欢迎回来。',
+      returnBackTitle: '回到应用',
+      returnBackMessage: '尊敬的{username}，欢迎回来！',
       greeting: {
         deepNight: '深夜好',
         morning: '早上好',
@@ -354,6 +359,9 @@ const messages = {
       typeDashboard: 'Dashboard',
       typeSidebar: 'Sidebar',
       typeModal: 'Modal',
+      typeGlobal: 'Global Notification',
+      globalLoginNotifyLabel: 'Show login success notification',
+      globalReturnNotifyLabel: 'Show return-to-app notification',
       strategyLabel: 'Dashboard Display Strategy',
       strategyMarquee: 'Marquee',
       strategyStatic: 'Static',
@@ -386,6 +394,8 @@ const messages = {
     notify: {
       loginSuccessTitle: 'Login Successful',
       welcomeBack: 'Welcome back.',
+      returnBackTitle: 'Back to App',
+      returnBackMessage: 'Welcome back, {username}!',
       greeting: {
         deepNight: 'Good late night',
         morning: 'Good morning',
