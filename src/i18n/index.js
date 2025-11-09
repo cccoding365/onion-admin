@@ -181,6 +181,19 @@ const messages = {
       empty: '暂无历史通知',
       currentTag: '当前'
     },
+    notify: {
+      loginSuccessTitle: '登录成功',
+      welcomeBack: '欢迎回来。',
+      greeting: {
+        deepNight: '深夜好',
+        morning: '早上好',
+        noon: '中午好',
+        afternoon: '下午好',
+        evening: '晚上好',
+      },
+      // 组装模板：{display} 可包含角色前缀+用户名（若无角色仅用户名）
+      loginSuccessMessage: '{display}，{greeting}！{welcomeBack}',
+    },
   },
   en: {
     app: {
@@ -361,6 +374,19 @@ const messages = {
       removed: 'Notification removed',
       empty: 'No history',
       currentTag: 'Current'
+    },
+    notify: {
+      loginSuccessTitle: 'Login Successful',
+      welcomeBack: 'Welcome back.',
+      greeting: {
+        deepNight: 'Good late night',
+        morning: 'Good morning',
+        noon: 'Good noon',
+        afternoon: 'Good afternoon',
+        evening: 'Good evening',
+      },
+      // In English, greet first, then name; role prefix uses raw role if present
+      loginSuccessMessage: '{greeting}, {display}! {welcomeBack}',
     },
   },
 }

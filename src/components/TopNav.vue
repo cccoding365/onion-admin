@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 import { FullScreen, Sunny, Moon } from "@element-plus/icons-vue";
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import { ElMessageBox } from "element-plus";
 
 const app = useAppStore();
 const user = useUserStore();
@@ -15,9 +16,23 @@ const { t, locale } = useI18n({ useScope: "global" });
 
 watch(color, (val) => app.setPrimaryColor(val));
 
-function logout() {
-  user.logout();
-  router.push("/auth");
+async function logout() {
+  try {
+    await ElMessageBox.confirm(
+      "确认要退出登录吗？",
+      "提示",
+      {
+        type: "warning",
+        confirmButtonText: "退出",
+        cancelButtonText: "取消",
+        closeOnClickModal: true,
+      }
+    );
+    user.logout();
+    router.push("/auth");
+  } catch (e) {
+    // 用户取消，不做处理
+  }
 }
 </script>
 

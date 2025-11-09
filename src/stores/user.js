@@ -10,6 +10,9 @@ export const useUserStore = defineStore('user', {
     currentUser: null,
     token: null,
     roles: [],
+    // 登录增强：记录最近登录时间，并在仪表盘显示一次问候
+    lastLoginAt: null,
+    greetOnNextDashboard: false,
   }),
   actions: {
     setRoles(roles) { this.roles = roles },
@@ -32,6 +35,8 @@ export const useUserStore = defineStore('user', {
       this.currentUser = { username, role, nickname: newUser.nickname, avatar: '', age: newUser.age, gender: newUser.gender, createdAt: newUser.createdAt }
       this.roles = [role]
       this.token = Math.random().toString(36).slice(2)
+      this.lastLoginAt = Date.now()
+      this.greetOnNextDashboard = true
     },
     login({ username, password }) {
       const found = this.users.find((u) => u.username === username && u.password === password)
@@ -39,11 +44,15 @@ export const useUserStore = defineStore('user', {
       this.currentUser = { username: found.username, role: found.role, nickname: found.nickname, avatar: found.avatar, age: found.age, gender: found.gender, createdAt: found.createdAt }
       this.roles = [found.role]
       this.token = Math.random().toString(36).slice(2)
+      this.lastLoginAt = Date.now()
+      this.greetOnNextDashboard = true
     },
     logout() {
       this.currentUser = null
       this.roles = []
       this.token = null
+      this.lastLoginAt = null
+      this.greetOnNextDashboard = false
     },
     updateProfile({ nickname, avatar, age, gender }) {
       if (!this.currentUser) throw new Error('Not logged in')

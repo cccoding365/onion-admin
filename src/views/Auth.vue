@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/user'
 import { useI18n } from 'vue-i18n'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElNotification } from 'element-plus'
 import { User, Lock } from '@element-plus/icons-vue'
 
 const { t } = useI18n({ useScope: 'global' })
@@ -43,10 +43,57 @@ async function submit() {
         localStorage.removeItem('onion_username')
         localStorage.removeItem('onion_password')
       }
+      // 登录成功后提示（国际化）
+      try {
+        const hour = new Date().getHours()
+        const key = hour < 5 ? 'notify.greeting.deepNight'
+          : hour < 11 ? 'notify.greeting.morning'
+          : hour < 13 ? 'notify.greeting.noon'
+          : hour < 18 ? 'notify.greeting.afternoon'
+          : 'notify.greeting.evening'
+        const greeting = t(key)
+        const role = user.currentUser?.role
+        const baseName = user.currentUser?.nickname || user.currentUser?.username || ''
+        const display = role && String(role).trim() ? `${role} ${baseName}` : baseName
+        ElNotification({
+          title: t('notify.loginSuccessTitle'),
+          message: t('notify.loginSuccessMessage', { display, greeting, welcomeBack: t('notify.welcomeBack') }),
+          position: 'top-right',
+          type: 'success',
+          duration: 4500,
+          offset: 40,
+        })
+      } catch (e) {
+        // 不影响后续跳转
+        console.warn('Login notification failed:', e)
+      }
     } else {
       // 注册时角色固定为普通用户
       role.value = 'user'
       await user.register({ username: username.value, password: password.value, role: role.value })
+      // 注册成功后也提示（国际化）
+      try {
+        const hour = new Date().getHours()
+        const key = hour < 5 ? 'notify.greeting.deepNight'
+          : hour < 11 ? 'notify.greeting.morning'
+          : hour < 13 ? 'notify.greeting.noon'
+          : hour < 18 ? 'notify.greeting.afternoon'
+          : 'notify.greeting.evening'
+        const greeting = t(key)
+        const roleCode = user.currentUser?.role
+        const baseName = user.currentUser?.nickname || user.currentUser?.username || ''
+        const display = roleCode && String(roleCode).trim() ? `${roleCode} ${baseName}` : baseName
+        ElNotification({
+          title: t('notify.loginSuccessTitle'),
+          message: t('notify.loginSuccessMessage', { display, greeting, welcomeBack: t('notify.welcomeBack') }),
+          position: 'top-right',
+          type: 'success',
+          duration: 4500,
+          offset: 40,
+        })
+      } catch (e) {
+        console.warn('Register notification failed:', e)
+      }
     }
     router.push('/dashboard')
   } catch (e) {
