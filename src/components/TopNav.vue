@@ -2,8 +2,8 @@
 import { useAppStore } from "../stores/app";
 import { useUserStore } from "../stores/user";
 import { useRouter } from "vue-router";
-import { FullScreen, Sunny, Moon } from "@element-plus/icons-vue";
-import { ref, watch } from "vue";
+import { FullScreen, Sunny, Moon, WarningFilled } from "@element-plus/icons-vue";
+import { ref, watch, h } from "vue";
 import { useI18n } from "vue-i18n";
 import { ElMessageBox } from "element-plus";
 
@@ -19,19 +19,22 @@ watch(color, (val) => app.setPrimaryColor(val));
 async function logout() {
   try {
     await ElMessageBox.confirm(
-      "确认要退出登录吗？",
-      "提示",
+      t("auth.logoutConfirmMessage"),
+      t("auth.logoutConfirmTitle"),
       {
-        type: "warning",
-        confirmButtonText: "退出",
-        cancelButtonText: "取消",
+        type: "error", // 使用红色主题强调危险操作
+        icon: h(WarningFilled),
+        showClose: true,
         closeOnClickModal: true,
+        confirmButtonText: t("auth.logoutConfirmConfirm"),
+        cancelButtonText: t("auth.logoutConfirmCancel"),
+        customClass: "danger-confirm",
       }
     );
     user.logout();
     router.push("/auth");
   } catch (e) {
-    // 用户取消，不做处理
+    // 用户取消或关闭弹窗，不做处理
   }
 }
 </script>

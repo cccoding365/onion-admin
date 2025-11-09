@@ -56,6 +56,10 @@ const messages = {
       forbidden: '访问被拒绝（403）',
       logout: '退出登录',
       remember: '记住账号密码',
+      logoutConfirmTitle: '退出登录确认',
+      logoutConfirmMessage: '该操作将退出当前账号，是否继续？',
+      logoutConfirmConfirm: '立即退出',
+      logoutConfirmCancel: '取消',
     },
     profile: {
       title: '个人中心',
@@ -250,6 +254,10 @@ const messages = {
       forbidden: 'Access Denied (403)',
       logout: 'Logout',
       remember: 'Remember username & password',
+      logoutConfirmTitle: 'Logout Confirmation',
+      logoutConfirmMessage: 'This will log you out. Continue?',
+      logoutConfirmConfirm: 'Log out now',
+      logoutConfirmCancel: 'Cancel',
     },
     profile: {
       title: 'Profile',

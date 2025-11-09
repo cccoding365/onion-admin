@@ -22,14 +22,6 @@
   box-shadow: none !important;
 }
 
-/* Select / Input wrapper focus ring */
-:root .el-input__wrapper.is-focus,
-:root .el-select__wrapper.is-focus,
-:root .el-select__wrapper.is-focused,
-:root .el-select .el-input.is-focus .el-input__wrapper {
-  box-shadow: none !important;
-}
-
 /* Color Picker */
 :root .el-color-picker__trigger:focus,
 :root .el-color-picker__trigger:focus-visible {
@@ -42,4 +34,16 @@
 :root .el-popper:focus-visible {
   outline: none !important;
   box-shadow: none !important;
+}
+
+/* Danger confirm dialog: emphasize red theme and warning icon */
+.el-message-box.danger-confirm .el-message-box__status {
+  color: var(--el-color-danger);
+}
+.el-message-box.danger-confirm .el-message-box__title {
+  color: var(--el-color-danger);
+}
+.el-message-box.danger-confirm .el-message-box__btns .el-button--primary {
+  background-color: var(--el-color-danger);
+  border-color: var(--el-color-danger);
 }
