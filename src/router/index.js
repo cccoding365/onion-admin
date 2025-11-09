@@ -12,6 +12,8 @@ const routes = [
   },
   { path: '/auth', component: () => import('../views/Auth.vue') },
   { path: '/403', component: () => import('../views/Forbidden.vue') },
+  // 全局兜底：未匹配的所有路由直接展示 404 页（不在布局中）
+  { path: '/:pathMatch(.*)*', component: () => import('../views/examples/404.vue') },
 ]
 
 const router = createRouter({
