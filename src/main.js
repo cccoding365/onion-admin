@@ -15,6 +15,8 @@ import 'nprogress/nprogress.css'
 
 // Theme override css vars
 import './styles/theme.css'
+// Global overrides for focus styles
+import './styles/overrides.css'
 import { i18n } from './i18n'
 
 const app = createApp(App)

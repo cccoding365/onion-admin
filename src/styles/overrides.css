@@ -1,0 +1,45 @@
+/*
+  全局覆盖 Element Plus 组件的聚焦样式，移除明显的聚焦边框/阴影效果。
+  注意：这可能影响键盘可访问性，如需保留可访问提示，请在特定页面或组件恢复样式。
+*/
+
+/* Button */
+:root .el-button:focus,
+:root .el-button:focus-visible,
+:root .el-button.is-focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Dropdown */
+:root .el-dropdown:focus,
+:root .el-dropdown:focus-visible,
+:root .el-dropdown .el-dropdown-link:focus,
+:root .el-dropdown .el-dropdown-link:focus-visible,
+:root .el-dropdown .el-tooltip__trigger:focus,
+:root .el-dropdown .el-tooltip__trigger:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Select / Input wrapper focus ring */
+:root .el-input__wrapper.is-focus,
+:root .el-select__wrapper.is-focus,
+:root .el-select__wrapper.is-focused,
+:root .el-select .el-input.is-focus .el-input__wrapper {
+  box-shadow: none !important;
+}
+
+/* Color Picker */
+:root .el-color-picker__trigger:focus,
+:root .el-color-picker__trigger:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Tooltip / Popper common */
+:root .el-popper:focus,
+:root .el-popper:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
