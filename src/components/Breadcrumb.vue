@@ -17,7 +17,7 @@ function go(path) {
 
 <template>
   <div style="display: flex; align-items: center; gap: 12px;">
-    <el-button text @click="app.toggleCollapse()">
+    <el-button text circle @click="app.toggleCollapse()">
       <el-icon>
         <component :is="app.collapsed ? Expand : Fold" />
       </el-icon>
