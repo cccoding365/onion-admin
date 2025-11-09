@@ -55,6 +55,7 @@ const messages = {
       user: '普通用户',
       forbidden: '访问被拒绝（403）',
       logout: '退出登录',
+      remember: '记住账号密码',
     },
     profile: {
       title: '个人中心',
@@ -190,6 +191,7 @@ const messages = {
       user: 'User',
       forbidden: 'Access Denied (403)',
       logout: 'Logout',
+      remember: 'Remember username & password',
     },
     profile: {
       title: 'Profile',

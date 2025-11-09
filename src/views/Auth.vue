@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/user'
 import { useI18n } from 'vue-i18n'
@@ -13,6 +13,8 @@ const user = useUserStore()
 const mode = ref('login') // 'login' | 'register'
 const username = ref('')
 const password = ref('')
+// 记住账号密码
+const remember = ref(false)
 // 注册固定为普通用户
 const role = ref('user')
 
@@ -31,6 +33,16 @@ async function submit() {
   try {
     if (mode.value === 'login') {
       await user.login({ username: username.value, password: password.value })
+      // 登录成功后根据“记住我”选项保存或清理本地存储
+      if (remember.value) {
+        localStorage.setItem('onion_remember', '1')
+        localStorage.setItem('onion_username', username.value)
+        localStorage.setItem('onion_password', password.value)
+      } else {
+        localStorage.removeItem('onion_remember')
+        localStorage.removeItem('onion_username')
+        localStorage.removeItem('onion_password')
+      }
     } else {
       // 注册时角色固定为普通用户
       role.value = 'user'
@@ -41,6 +53,16 @@ async function submit() {
     ElMessage.error(e?.message || String(e))
   }
 }
+
+// 初次加载时读取记住的账号密码
+onMounted(() => {
+  const saved = localStorage.getItem('onion_remember') === '1'
+  remember.value = saved
+  if (saved) {
+    username.value = localStorage.getItem('onion_username') || ''
+    password.value = localStorage.getItem('onion_password') || ''
+  }
+})
 </script>
 
 <template>
@@ -91,6 +113,11 @@ async function submit() {
                     <el-icon><Lock /></el-icon>
                   </template>
                 </el-input>
+              </el-form-item>
+              <el-form-item>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <el-checkbox v-model="remember">{{ t('auth.remember') }}</el-checkbox>
+                </div>
               </el-form-item>
               <el-button type="primary" style="width:100%" @click="submit">
                 {{ t('auth.login') }}
@@ -183,7 +210,7 @@ async function submit() {
 .flip-scene {
   perspective: 1200px;
   width: 380px;
-  height: 300px; /* 保持高度一致避免翻转时跳动 */
+  height: 360px; /* 保持高度一致避免翻转时跳动，避免按钮溢出 */
 }
 .flip-card {
   position: relative;
