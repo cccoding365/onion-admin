@@ -91,6 +91,26 @@ export const layoutRoutes = [
     ],
   },
   {
+    path: "/office",
+    name: "Office",
+    redirect: "/office/excel",
+    meta: { titleKey: "menu.office", icon: "Printer" },
+    children: [
+      {
+        path: "/office/excel",
+        name: "OfficeExcel",
+        component: () => import("../views/office/Excel.vue"),
+        meta: { titleKey: "menu.officeExcel" },
+      },
+      {
+        path: "/office/word",
+        name: "OfficeWord",
+        component: () => import("../views/office/Word.vue"),
+        meta: { titleKey: "menu.officeWord" },
+      },
+    ],
+  },
+  {
     path: "/files",
     name: "Files",
     component: () => import("../views/Files.vue"),
